@@ -9,11 +9,13 @@ module.exports = {
 
 function getUsers() {
     return db('users')
+        .select('username')
 }
 
 function getUserById(id) {
     return db('users')
         .where({ id })
+        .select('username')
         .first()
 }
 
