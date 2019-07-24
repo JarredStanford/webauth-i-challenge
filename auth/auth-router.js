@@ -82,8 +82,10 @@ router.get('/logout', (req, res) => {
 })
 
 //middleware
-function uniqueNameCheck(req, res, next) {
-    Users.getUserByName(req.body.username)
+async function uniqueNameCheck(req, res, next) {
+    const { username } = req.body
+    const user = await Users.getUserByName(username)
+    user
         ? res.status(400).json({
             message: "A user with this name already exists."
         })
